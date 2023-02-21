@@ -1,0 +1,6 @@
+logs_root_path: logs_proto
+object_id: "shirt"
+train:
+- "shirt_hanging"
+test:
+- "shirt_hanging_test"
