@@ -6,39 +6,39 @@ networks:
   # SHIRT HANGING MODELS
   # Distributional symmetric models
   shirt_hanging_d3_distributional_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_distributional_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_distributional_sym/005001.pth
   shirt_hanging_d9_distributional_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_distributional_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_distributional_sym/005001.pth
   shirt_hanging_d16_distributional_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym/005001.pth
   shirt_hanging_d16_distributional_sym_big:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym_big/010001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym_big/010001.pth
   
   # Distributional non-symmetric models
   shirt_hanging_d3_distributional_non_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_distributional_non_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_distributional_non_sym/005001.pth
   shirt_hanging_d9_distributional_non_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_distributional_non_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_distributional_non_sym/005001.pth
   shirt_hanging_d16_distributional_non_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_non_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_non_sym/005001.pth
   
   # Contrastive symmetric models
   shirt_hanging_d3_contrastive_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_contrastive_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_contrastive_sym/005001.pth
   shirt_hanging_d9_contrastive_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_contrastive_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_contrastive_sym/005001.pth
   shirt_hanging_d16_contrastive_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_contrastive_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_contrastive_sym/005001.pth
   
   # Contrastive non-symmetric models
   shirt_hanging_d3_contrastive_non_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_contrastive_non_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d3_contrastive_non_sym/005001.pth
   shirt_hanging_d9_contrastive_non_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_contrastive_non_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d9_contrastive_non_sym/005001.pth
   shirt_hanging_d16_contrastive_non_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_contrastive_non_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_contrastive_non_sym/005001.pth
   
   
   # SHIRT-ON-TABLE MODELS
   shirt_table_d16_distributional_sym:
-    path_to_network_params: pytorch-dense-correspondence/pdc/trained_models/tutorials/shirt_table_d16_distributional_sym/005001.pth
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_table_d16_distributional_sym/005001.pth

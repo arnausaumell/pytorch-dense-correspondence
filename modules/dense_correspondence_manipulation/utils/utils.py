@@ -14,9 +14,11 @@ import torch
 
 import dense_correspondence_manipulation.utils.transformations as transformations
 
+
 def getDictFromJSONFilename(filename):
     with open(filename, "r") as stream:
         return json.load(stream)
+
 
 def getDictFromYamlFilename(filename):
     """
@@ -24,37 +26,42 @@ def getDictFromYamlFilename(filename):
     """
     return yaml.load(open(filename), Loader=CLoader)
 
+
 def saveToYaml(data, filename):
     """
     Save a data to a YAML file
     """
-    with open(filename, 'w') as outfile:
+    with open(filename, "w") as outfile:
         yaml.dump(data, outfile, default_flow_style=False)
 
+
 def getDenseCorrespondenceSourceDir():
-    project_name = "pytorch-dense-correspondence"
+    project_name = "pytorch_dense_correspondence"
     indx = os.getcwd().find(project_name)
-    DC_SOURCE_DIR = os.getcwd()[:indx+len(project_name)]
-    return DC_SOURCE_DIR
+    if indx == -1:
+        return os.path.join(os.getcwd(), project_name)
+    return os.getcwd()[: indx + len(project_name)]
+
 
 def get_data_dir():
     return os.path.join(getDenseCorrespondenceSourceDir(), "pdc")
+
 
 def dictFromPosQuat(pos, quat):
     """
     Make a dictionary from position and quaternion vectors
     """
     d = dict()
-    d['translation'] = dict()
-    d['translation']['x'] = pos[0]
-    d['translation']['y'] = pos[1]
-    d['translation']['z'] = pos[2]
+    d["translation"] = dict()
+    d["translation"]["x"] = pos[0]
+    d["translation"]["y"] = pos[1]
+    d["translation"]["z"] = pos[2]
 
-    d['quaternion'] = dict()
-    d['quaternion']['w'] = quat[0]
-    d['quaternion']['x'] = quat[1]
-    d['quaternion']['y'] = quat[2]
-    d['quaternion']['z'] = quat[3]
+    d["quaternion"] = dict()
+    d["quaternion"]["w"] = quat[0]
+    d["quaternion"]["x"] = quat[1]
+    d["quaternion"]["y"] = quat[2]
+    d["quaternion"]["z"] = quat[3]
 
     return d
 
@@ -65,19 +72,22 @@ def getQuaternionFromDict(d):
     one of orientation, rotation, quaternion depending on the convention
     """
     quat = None
-    quatNames = ['orientation', 'rotation', 'quaternion']
+    quatNames = ["orientation", "rotation", "quaternion"]
     for name in quatNames:
         if name in d:
             quat = d[name]
 
-
     if quat is None:
-        raise ValueError("Error when trying to extract quaternion from dict, your dict doesn't contain a key in ['orientation', 'rotation', 'quaternion']")
+        raise ValueError(
+            "Error when trying to extract quaternion from dict, your dict doesn't contain a key in ['orientation', 'rotation', 'quaternion']"
+        )
 
     return quat
 
+
 def getPaddedString(idx, width=6):
     return str(idx).zfill(width)
+
 
 def set_cuda_visible_devices(gpu_list):
     """
@@ -98,6 +108,7 @@ def set_cuda_visible_devices(gpu_list):
     print("setting CUDA_VISIBLE_DEVICES = ", cuda_visible_devices)
     os.environ["CUDA_VISIBLE_DEVICES"] = cuda_visible_devices
 
+
 def set_default_cuda_visible_devices():
     config = get_defaults_config()
     host_name = socket.gethostname()
@@ -107,9 +118,10 @@ def set_default_cuda_visible_devices():
             gpu_list = config[host_name][user_name]["cuda_visible_devices"]
             set_cuda_visible_devices(gpu_list)
 
+
 def get_defaults_config():
     dc_source_dir = getDenseCorrespondenceSourceDir()
-    default_config_file = os.path.join(dc_source_dir, 'config', 'defaults.yaml')
+    default_config_file = os.path.join(dc_source_dir, "config", "defaults.yaml")
 
     return getDictFromYamlFilename(default_config_file)
 
@@ -117,10 +129,12 @@ def get_defaults_config():
 def add_dense_correspondence_to_python_path():
     dc_source_dir = getDenseCorrespondenceSourceDir()
     sys.path.append(dc_source_dir)
-    sys.path.append(os.path.join(dc_source_dir, 'pytorch-segmentation-detection'))
+    sys.path.append(os.path.join(dc_source_dir, "pytorch-segmentation-detection"))
 
     # for some reason it is critical that this be at the beginning . . .
-    sys.path.insert(0, os.path.join(dc_source_dir, 'pytorch-segmentation-detection', 'vision'))
+    sys.path.insert(
+        0, os.path.join(dc_source_dir, "pytorch-segmentation-detection", "vision")
+    )
 
 
 def convert_to_absolute_path(path):
@@ -132,12 +146,10 @@ def convert_to_absolute_path(path):
     :rtype: str
     """
 
-    if os.path.isdir(path):
-        return path
-
-
-    home_dir = os.path.expanduser("~")
+    home_dir = getDenseCorrespondenceSourceDir()
+    home_dir = "/".join(home_dir.split("/")[:-1])
     return os.path.join(home_dir, path)
+
 
 def get_current_time_unique_name():
     """
@@ -149,28 +161,30 @@ def get_current_time_unique_name():
     unique_name = time.strftime("%Y%m%d-%H%M%S")
     return unique_name
 
+
 def homogenous_transform_from_dict(d):
     """
     Returns a transform from a standard encoding in dict format
     :param d:
     :return:
     """
-    pos = [0]*3
-    pos[0] = d['translation']['x']
-    pos[1] = d['translation']['y']
-    pos[2] = d['translation']['z']
+    pos = [0] * 3
+    pos[0] = d["translation"]["x"]
+    pos[1] = d["translation"]["y"]
+    pos[2] = d["translation"]["z"]
 
     quatDict = getQuaternionFromDict(d)
-    quat = [0]*4
-    quat[0] = quatDict['w']
-    quat[1] = quatDict['x']
-    quat[2] = quatDict['y']
-    quat[3] = quatDict['z']
+    quat = [0] * 4
+    quat[0] = quatDict["w"]
+    quat[1] = quatDict["x"]
+    quat[2] = quatDict["y"]
+    quat[3] = quatDict["z"]
 
     transform_matrix = transformations.quaternion_matrix(quat)
-    transform_matrix[0:3,3] = np.array(pos)
+    transform_matrix[0:3, 3] = np.array(pos)
 
     return transform_matrix
+
 
 def compute_distance_between_poses(pose_a, pose_b):
     """
@@ -183,10 +197,11 @@ def compute_distance_between_poses(pose_a, pose_b):
     :rtype:
     """
 
-    pos_a = pose_a[0:3,3]
-    pos_b = pose_b[0:3,3]
+    pos_a = pose_a[0:3, 3]
+    pos_b = pose_b[0:3, 3]
 
     return np.linalg.norm(pos_a - pos_b)
+
 
 def compute_angle_between_quaternions(q, r):
     """
@@ -203,8 +218,9 @@ def compute_angle_between_quaternions(q, r):
     :rtype:
     """
 
-    theta = 2*np.arccos(2 * np.dot(q,r)**2 - 1)
+    theta = 2 * np.arccos(2 * np.dot(q, r) ** 2 - 1)
     return theta
+
 
 def compute_angle_between_poses(pose_a, pose_b):
     """
@@ -221,7 +237,6 @@ def compute_angle_between_poses(pose_a, pose_b):
     quat_b = transformations.quaternion_from_matrix(pose_b)
 
     return compute_angle_between_quaternions(quat_a, quat_b)
-
 
 
 def get_model_param_file_from_directory(model_folder, iteration=None):
@@ -243,9 +258,9 @@ def get_model_param_file_from_directory(model_folder, iteration=None):
     # find idx.pth and idx.pth.opt files
     if iteration is None:
         files = os.listdir(model_folder)
-        model_param_file = sorted(fnmatch.filter(files, '*.pth'))[-1]
+        model_param_file = sorted(fnmatch.filter(files, "*.pth"))[-1]
         iteration = int(model_param_file.split(".")[0])
-        optim_param_file = sorted(fnmatch.filter(files, '*.pth.opt'))[-1]
+        optim_param_file = sorted(fnmatch.filter(files, "*.pth.opt"))[-1]
     else:
         prefix = getPaddedString(iteration, width=6)
         model_param_file = prefix + ".pth"
@@ -269,14 +284,19 @@ def flattened_pixel_locations_to_u_v(flat_pixel_locations, image_width):
     the pixel and the second column is the v coordinate
 
     """
-    return (flat_pixel_locations%image_width, torch.div(flat_pixel_locations, image_width, rounding_mode='trunc'))
+    return (
+        flat_pixel_locations % image_width,
+        torch.div(flat_pixel_locations, image_width, rounding_mode="trunc"),
+    )
+
 
 def uv_to_flattened_pixel_locations(uv_tuple, image_width):
     """
     Converts to a flat tensor
     """
-    flat_pixel_locations = uv_tuple[1]*image_width + uv_tuple[0]
+    flat_pixel_locations = uv_tuple[1] * image_width + uv_tuple[0]
     return flat_pixel_locations
+
 
 def reset_random_seed():
     SEED = 1
@@ -284,11 +304,13 @@ def reset_random_seed():
     np.random.seed(SEED)
     torch.manual_seed(SEED)
 
+
 class CameraIntrinsics(object):
     """
     Useful class for wrapping camera intrinsics and loading them from a
     camera_info.yaml file
     """
+
     def __init__(self, cx, cy, fx, fy, width, height):
         self.cx = cx
         self.cy = cy
@@ -300,20 +322,19 @@ class CameraIntrinsics(object):
         self.K = self.get_camera_matrix()
 
     def get_camera_matrix(self):
-        return np.array([[self.fx, 0, self.cx], [0, self.fy, self.cy], [0,0,1]])
+        return np.array([[self.fx, 0, self.cx], [0, self.fy, self.cy], [0, 0, 1]])
 
     @staticmethod
     def from_yaml_file(filename):
         config = getDictFromYamlFilename(filename)
 
-        fx = config['camera_matrix']['data'][0]
-        cx = config['camera_matrix']['data'][2]
+        fx = config["camera_matrix"]["data"][0]
+        cx = config["camera_matrix"]["data"][2]
 
-        fy = config['camera_matrix']['data'][4]
-        cy = config['camera_matrix']['data'][5]
+        fy = config["camera_matrix"]["data"][4]
+        cy = config["camera_matrix"]["data"][5]
 
-        width = config['image_width']
-        height = config['image_height']
+        width = config["image_width"]
+        height = config["image_height"]
 
         return CameraIntrinsics(cx, cy, fx, fy, width, height)
-
