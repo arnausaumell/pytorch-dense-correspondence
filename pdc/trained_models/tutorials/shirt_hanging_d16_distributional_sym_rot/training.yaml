@@ -1,0 +1,51 @@
+dense_correspondence_network:
+  descriptor_dimension: 16
+  image_height: 720
+  image_width: 960
+  loss_type: distributional
+  net_type: resnet34
+  normalize: true
+  sigma: 1
+  symmetry: true
+loss_function:
+  M_background: 0.5
+  M_masked: 0.5
+  M_pixel: 50
+  alpha_triplet: 0.1
+  match_loss_weight: 1.0
+  non_match_loss_weight: 1.0
+  scale_by_hard_negatives: true
+  scale_by_hard_negatives_DIFFERENT_OBJECT: true
+  use_l2_pixel_loss_on_background_non_matches: false
+  use_l2_pixel_loss_on_masked_non_matches: false
+training:
+  batch_size: 1
+  compute_test_loss: false
+  compute_test_loss_rate: 500
+  cross_scene_num_samples: 10000
+  data_type_probabilities:
+    DIFFERENT_OBJECT: 0
+    MULTI_OBJECT: 0
+    SINGLE_OBJECT_ACROSS_SCENE: 0
+    SINGLE_OBJECT_WITHIN_SCENE: 1
+    SYNTHETIC_MULTI_OBJECT: 0
+  domain_randomize: true
+  fraction_background_non_matches: 0.5
+  fraction_masked_non_matches: 0.5
+  garbage_collect_rate: 1
+  learning_rate: 0.0001
+  learning_rate_decay: 0.9
+  logging_dir: /home/gridsan/aportillo/pytorch-dense-correspondence/pdc/trained_models/tutorials
+  logging_dir_name: shirt_hanging_d16_distributional_sym_rot
+  logging_rate: 10
+  loss_function: pixelwise_contrastive_loss
+  num_iterations: 5000
+  num_matching_attempts: 10000
+  num_non_matches_per_match: 150
+  num_workers: 5
+  sample_matches_only_off_mask: true
+  save_rate: 500
+  steps_between_learning_rate_decay: 250
+  test_loss_num_iterations: 50
+  use_image_b_mask_inv: true
+  weight_decay: 0.0001

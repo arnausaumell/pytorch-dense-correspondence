@@ -13,6 +13,8 @@ networks:
     path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym/005001.pth
   shirt_hanging_d16_distributional_sym_big:
     path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym_big/010001.pth
+  shirt_hanging_d16_distributional_sym_rot:
+    path_to_network_params: pytorch_dense_correspondence/pdc/trained_models/tutorials/shirt_hanging_d16_distributional_sym_rot/005001.pth
   
   # Distributional non-symmetric models
   shirt_hanging_d3_distributional_non_sym:
